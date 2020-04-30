@@ -16,7 +16,10 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
 import java.net.URI;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 @RestController
 @Api("API pour les opérations de Théo")
@@ -42,10 +45,21 @@ public class ProductController {
     @ApiOperation(value = "Récupère un produit grâce à son ID à condition que celui-ci soit en stock!")
     @GetMapping(value = "/Produits/{id}")
     public Product afficherUnProduit(@PathVariable int id) {
-
         Product produit =  productDao.findById(id);
         if(produit==null) throw new ProduitIntrouvableException("Le produit" + id +" n'existe pas.");
         return produit;
+    }
+
+    //Récupérer un produit par son Id
+    @ApiOperation(value = "Récupère les produits et calcule leur marge")
+    @GetMapping(value = "/AdminProduits")
+    public Map<String, Integer> calculerMargeProduit() {
+        List<Product> recupererlesProduit = productDao.findAll();
+        Map<String, Integer> lMap = new HashMap<>();
+        for(Product p: recupererlesProduit) {
+            lMap.put(p.toString(), p.getPrix() - p.getPrixAchat());
+        }
+        return lMap;
     }
 
     /*@GetMapping(value = "test/produits/{prixLimit}")
