@@ -62,6 +62,14 @@ public class ProductController {
         return lMap;
     }
 
+    //Récupérer un produit par son Id
+    @ApiOperation(value = "Trie les produits")
+    @GetMapping(value = "/OrdreProduits")
+    public List<Product> trierProduitsParOrdreAlphabetique() {
+        List<Product> recupererlesProduit = productDao.findAllByOrderByNom();
+        return recupererlesProduit;
+    }
+
     /*@GetMapping(value = "test/produits/{prixLimit}")
     public List<Product> testeDeRequetesPrix(@PathVariable int prixLimit) {
         return productDao.findByPrixGreaterThan(600);
