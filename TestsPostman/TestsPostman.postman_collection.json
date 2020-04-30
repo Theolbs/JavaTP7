@@ -1,0 +1,112 @@
+{
+	"info": {
+		"_postman_id": "b20f7d11-db4a-44f1-8e51-baf1bf12ef19",
+		"name": "TestsPostman",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "GET Produits",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "243ce192-43b9-41b7-a819-85bc40b749fb",
+						"exec": [
+							"pm.test(\"Status code 200\", function(){",
+							"    pm.response.to.have.status(200);",
+							"    pm.response.count == 3;",
+							"})",
+							"pm.test(\"Count\", function(){",
+							"    pm.response.count > 0;",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:9090/Produits/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9090",
+					"path": [
+						"Produits",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET Produits By ID",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": {},
+						"id": "cec74e1e-c18b-4d8a-9279-9e8aa29298df"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:9090/Produits/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9090",
+					"path": [
+						"Produits",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET Produits By ID invalide",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "bbb4ab45-c0e6-41aa-9e2b-7750b0447a31",
+						"exec": [
+							"pm.test(\"Status code 200\", function(){",
+							"    pm.response.to.have.status(404);",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:9090/Produits/0",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9090",
+					"path": [
+						"Produits",
+						"0"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
