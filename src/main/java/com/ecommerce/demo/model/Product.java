@@ -21,7 +21,7 @@ public class Product {
     @Length(min=3, max=20, message = "Veuillez ecrire un nom long mais pas trop")
     private String nom;
 
-    @Min(value=1)
+    @Min(value=-1)
     private int prix;
     private int prixAchat;
 

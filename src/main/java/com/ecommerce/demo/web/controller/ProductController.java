@@ -2,6 +2,7 @@ package com.ecommerce.demo.web.controller;
 
 import com.ecommerce.demo.dao.ProductDAO;
 import com.ecommerce.demo.model.Product;
+import com.ecommerce.demo.web.exceptions.ProduitGratuitException;
 import com.ecommerce.demo.web.exceptions.ProduitIntrouvableException;
 import com.fasterxml.jackson.databind.ser.FilterProvider;
 import com.fasterxml.jackson.databind.ser.impl.SimpleBeanPropertyFilter;
@@ -84,6 +85,7 @@ public class ProductController {
     //ajouter un produit
     @PostMapping(value = "/Produits")
     public ResponseEntity<Void> ajouterProduit(@Valid @RequestBody Product product) {
+        if(product.getPrix() == 0) throw new ProduitGratuitException("Impossible d'ajouter un produit gratuit.");
         Product productAdded = productDao.save(product);
         if (productAdded == null)
             return ResponseEntity.noContent().build();
